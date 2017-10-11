@@ -1,0 +1,69 @@
+#!/bin/bash
+#
+# /etc/rc.d/init.d/rancid
+#
+# chkconfig: 2345 86 14
+# description: RANCID Daemon
+
+# Define variables
+RANCID_PID=/var/run/rancid.pid
+RANCID_EXE=/usr/sbin/rancid
+RANCID_ARG=""
+RANCID_CNF=/etc/tacacs/rancid.conf
+
+# Source function library.
+#. /etc/rc.d/init.d/functions
+. /lib/lsb/init-functions
+
+case "$1" in
+start)
+# Check to see if rancid is running.
+if [[ -f ${RANCID_PID} || -f /var/lock/subsys/rancid ]]; then
+	echo "rancid may already be running. Check for existing rancid processes."
+	exit 1
+fi
+echo -n "Starting rancid:"
+$RANCID_EXE $RANCID_ARG -C $RANCID_CNF && success || failure
+echo
+touch /var/lock/subsys/rancid
+;;
+stop)
+if [[ -f ${RANCID_PID} && -f /var/lock/subsys/rancid ]]; then
+	echo -n "Stopping rancid:"
+	killproc -p ${RANCID_PID}
+	echo
+	rm -f /var/lock/subsys/rancid
+	rm -f ${RANCID_PID}
+else
+	echo "rancid does not appear to be running."
+fi
+;;
+status)
+if [[ -f ${RANCID_PID} && -f /var/lock/subsys/rancid ]]; then
+       echo "rancid pid is `cat ${RANCID_PID}`"
+else
+        echo "rancid does not appear to be running."
+fi
+;;
+restart)
+$0 stop; $0 start
+;;
+reload)
+echo -n "Reloading rancid..."
+if [[ -f ${RANCID_PID} && -f /var/lock/subsys/rancid ]]; then
+	kill -HUP `cat ${RANCID_PID}`
+	RETVAL=$?
+fi
+if [ $RETVAL -ne 0 ]; then
+	failure
+else
+	success
+fi
+echo
+
+;;
+*)
+echo "Usage: $0 {start|stop|status|reload|restart}"
+exit 1
+;;
+esac

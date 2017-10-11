@@ -1,0 +1,8 @@
+[Unit]
+Description=Shrubbery RANCID Server
+After=network.target auditd.service
+
+[Service]
+ExecStart=/usr/sbin/rancid -C /etc/rancid/rancid.conf
+KillMode=process
+Restart=on-failure
