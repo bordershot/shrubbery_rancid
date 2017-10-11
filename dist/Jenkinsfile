@@ -58,7 +58,7 @@ for (x in os_to_build) {
         }
         stage('download') {
           sh "wget ftp://ftp.shrubbery.net/pub/rancid/rancid-${version_number}.tar.gz"
-          sh "tar xvzf rancid-${version_number}.tar.gz"
+          sh "tar xvzf rancid-${version_number}.tar.gz -C ."
         }
         stage('build') {
           sh "rm -rf $WORKSPACE/fpm-build-${OS} || true"
@@ -71,7 +71,7 @@ for (x in os_to_build) {
           } else {
             sh '[ -d "dist/sysv" ] && rsync -a dist/sysv/ $OUTPUT_DIR'
           }
-          sh "cd rancid-${version_number} && ./configure && make && make install DESTDIR=$WORKSPACE/fpm-build-${OS}"
+          sh "./configure && make && make install DESTDIR=$WORKSPACE/fpm-build-${OS}"
         }
         stage('package') {
           sh "cd $WORKSPACE/out; fpm -f -t ${osmap[OS]['packaging']} -s dir -n ${package_name}${deb_dist} --version ${version_number} --iteration ${BUILD_NUMBER} ${rpm_dist} ${os_init_script} --description \"${description}\" ${install_deps} -C $WORKSPACE/fpm-build-${OS} ."
