@@ -1,6 +1,6 @@
 def package_name = 'rancid'
 def description = 'Rancid for DD'
-def os_to_build = ['CentOS6']
+def os_to_build = ['CentOS7', 'Ubuntu1604', 'Ubuntu1404']
 def version_number = "3.7"
 def osmap = ['CentOS7':['packaging':'rpm', 'init':'systemd', 'distro':'el7', 
                         'build_env':'alanfranz/fwd-centos-7:latest',
