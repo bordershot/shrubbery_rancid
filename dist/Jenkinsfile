@@ -57,6 +57,7 @@ for (x in os_to_build) {
           }
         }
         stage('download') {
+          git url: 'https://github.com/bordershot/shrubbery_rancid.git'
           sh "wget ftp://ftp.shrubbery.net/pub/rancid/rancid-${version_number}.tar.gz"
           sh "tar xvzf rancid-${version_number}.tar.gz"
         }
