@@ -4,7 +4,7 @@ def os_to_build = ['CentOS7']
 def version_number = "3.7"
 def osmap = ['CentOS7':['packaging':'rpm', 'init':'systemd', 'distro':'el7', 
                         'build_env':'alanfranz/fwd-centos-7:latest',
-                        'build_deps':['gcc', 'make', 'wget'],
+                        'build_deps':['gcc', 'make', 'wget', 'expect'],
                         'install_deps':['perl', 'tcp_wrappers'], test_env:'centos:7'],
              'CentOS6':['packaging':'rpm', 'init':'sysv', 'distro':'el6', 
                         'build_env':'alanfranz/fwd-centos-6:latest',
