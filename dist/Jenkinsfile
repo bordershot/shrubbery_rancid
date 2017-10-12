@@ -8,8 +8,8 @@ def osmap = ['CentOS7':['packaging':'rpm', 'init':'systemd', 'distro':'el7',
                         'install_deps':['perl'], test_env:'centos:7'],
              'CentOS6':['packaging':'rpm', 'init':'sysv', 'distro':'el6', 
                         'build_env':'alanfranz/fwd-centos-6:latest',
-                        'build_deps':['gcc', 'make', 'wget', 'expect'],
-                        'install_deps':['perl'], test_env:'centos:6'],
+                        'build_deps':['gcc', 'make', 'wget', 'expect', 'perl-Socket6'],
+                        'install_deps':['perl', 'perl-Socket6'], test_env:'centos:6'],
              'Ubuntu1604':['packaging':'deb', 'init':'systemd', 'distro':'xenial', 
                            'build_env':'alanfranz/fwd-ubuntu-xenial:latest',
                            'build_deps':['gcc', 'make', 'wget', 'expect', 'iputils-ping'],
@@ -72,7 +72,6 @@ for (x in os_to_build) {
           } else {
             sh '[ -d "dist/sysv" ] && rsync -a dist/sysv/ $OUTPUT_DIR'
           }
-          sh "ls rancid-${version_number}"
           sh "cd rancid-${version_number} && ./configure && make && make install DESTDIR=$WORKSPACE/fpm-build-${OS}"
         }
         stage('package') {
