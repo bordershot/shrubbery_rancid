@@ -58,7 +58,7 @@ for (x in os_to_build) {
         }
         stage('download') {
           sh "wget ftp://ftp.shrubbery.net/pub/rancid/rancid-${version_number}.tar.gz"
-          sh "tar xvzf rancid-${version_number}.tar.gz -C ."
+          sh "tar xvzf rancid-${version_number}.tar.gz -C . --strip-components=1"
         }
         stage('build') {
           sh "rm -rf $WORKSPACE/fpm-build-${OS} || true"
