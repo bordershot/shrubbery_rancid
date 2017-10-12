@@ -71,6 +71,7 @@ for (x in os_to_build) {
           } else {
             sh '[ -d "dist/sysv" ] && rsync -a dist/sysv/ $OUTPUT_DIR'
           }
+          sh "ls rancid-${version_number}"
           sh "cd rancid-${version_number} && ./configure && make && make install DESTDIR=$WORKSPACE/fpm-build-${OS}"
         }
         stage('package') {
