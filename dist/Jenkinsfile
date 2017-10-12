@@ -87,7 +87,7 @@ for (x in os_to_build) {
           } else {
             sh "apt-get update; dpkg -i $WORKSPACE/out/${package_name}*.deb || /bin/true; apt-get -f -y install"
           }
-          sh "systemctl daemon-reload && systemctl status ${package_name}"
+          sh "/usr/sbin/init && systemctl daemon-reload && systemctl status ${package_name}"
         }
       }
       stage('publish') {
