@@ -12,11 +12,11 @@ def osmap = ['CentOS7':['packaging':'rpm', 'init':'systemd', 'distro':'el7',
                         'install_deps':['pam-devel', 'tcp_wrappers', 'redhat-lsb'], test_env:'centos:6'],
              'Ubuntu1604':['packaging':'deb', 'init':'systemd', 'distro':'xenial', 
                            'build_env':'alanfranz/fwd-ubuntu-xenial:latest',
-                           'build_deps':['gcc', 'make', 'wget', 'expect'],
+                           'build_deps':['gcc', 'make', 'wget', 'expect', 'ping'],
                            'install_deps':['libpam0g-dev', 'libwrap0'], test_env:'ubuntu:xenial'],
              'Ubuntu1404':['packaging':'deb', 'init':'sysv', 'distro':'trusty',
                            'build_env':'alanfranz/fwd-ubuntu-trusty:latest',
-                           'build_deps':['gcc', 'make', 'wget', 'expect'],
+                           'build_deps':['gcc', 'make', 'wget', 'expect', 'ping'],
                            'install_deps':['libpam0g-dev', 'libwrap0'], test_env:'ubuntu:trusty'],
             ]
 
