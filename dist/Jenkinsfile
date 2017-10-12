@@ -5,7 +5,7 @@ def version_number = "3.7"
 def osmap = ['CentOS7':['packaging':'rpm', 'init':'systemd', 'distro':'el7', 
                         'build_env':'alanfranz/fwd-centos-7:latest', 
                         'build_deps':['gcc', 'expect', 'wget', 'expect', 'cvs', 'python', 'httpd', 'make', 'autoconf', 'gcc-c++', 'kernel-devel', 'mod_python', 'MySQL-python', 'diffutils', 'php-common', 'php-gd', 'php-mcrypt', 'php-pear', 'php-pecl-memcache', 'phpmhash', 'php-mysql', 'php-xml'], 
-                        'install_deps':['pam-devel', 'tcp_wrappers'], test_env:'centos:7'],
+                        'install_deps':['pam-devel', 'tcp_wrappers'], test_env:'centos/systemd'],
              'CentOS6':['packaging':'rpm', 'init':'sysv', 'distro':'el6', 
                         'build_env':'alanfranz/fwd-centos-6:latest',
                         'build_deps':['gcc', 'bison', 'flex', 'm4', 'pam-devel', 'tcp_wrappers', 'tcp_wrappers-devel'],
