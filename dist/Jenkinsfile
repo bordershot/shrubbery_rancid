@@ -87,7 +87,7 @@ for (x in os_to_build) {
           } else {
             sh "apt-get update; dpkg -i $WORKSPACE/out/${package_name}*.deb || /bin/true; apt-get -f -y install"
           }
-          sh "/usr/local/rancid/bin/${package_name} -h || /bin/true"
+          sh "/usr/local/rancid/bin/${package_name} -V"
         }
       }
       stage('publish') {
